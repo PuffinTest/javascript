@@ -45,6 +45,21 @@ export function expectNotEqual(actual, unexpected, message = 'Values are unexpec
   }
 }
 
+/** Fail unless two numbers are close under relative and absolute tolerances. */
+export function expectClose(actual, expected, { relTol = 1e-9, absTol = 0, message } = {}) {
+  if (typeof actual !== 'number' || typeof expected !== 'number') {
+    throw new TypeError('actual and expected must be numbers');
+  }
+  if (!Number.isFinite(relTol) || !Number.isFinite(absTol) || relTol < 0 || absTol < 0) {
+    throw new RangeError('tolerances must be finite and nonnegative');
+  }
+  const close = actual === expected || (
+    Number.isFinite(actual) && Number.isFinite(expected) &&
+    Math.abs(actual - expected) <= Math.max(relTol * Math.max(Math.abs(actual), Math.abs(expected)), absTol)
+  );
+  if (!close) throw new ExpectationFailure(message ?? `Values are not close (relTol=${relTol}, absTol=${absTol})`, { actual, expected });
+}
+
 /** Fail unless container includes item (using its native includes method). */
 export function expectContains(container, item, message = 'Item is not present in the container') {
   if (container == null || typeof container.includes !== 'function') {
