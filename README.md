@@ -7,12 +7,13 @@ This package is under development and has not been published to npm. Its API and
 ## Example
 
 ```js
-import { expectEqual, expectLength, runTests, test } from 'puffintest';
+import { expectEqual, expectLength, expectStartsWith, runTests, test } from 'puffintest';
 
 const cases = [
   test('greets the user', () => {
     expectEqual('hello'.toUpperCase(), 'HELLO');
     expectLength(['north', 'south'], 2);
+    expectStartsWith('puffin test', 'puffin');
   }),
 ];
 
@@ -32,6 +33,7 @@ From this directory, run the included example with `npm run example`. For local 
 - `expectContains(container, item, message?)` checks the container's native `includes` method.
 - `expectNotContains(container, item, message?)` fails if the item is present.
 - `expectLength(actual, expected, message?)`, `expectEmpty(actual, message?)`, and `expectNotEmpty(actual, message?)` check array, string, map, set, and typed-array sizes.
+- `expectStartsWith(actual, prefix, message?)` and `expectEndsWith(actual, suffix, message?)` check string prefixes and suffixes.
 - `expectThrows(callback, ErrorClassOrPredicate?, message?)` checks a synchronous callback for an exception.
 - `fail(message?)` explicitly fails the current case.
 - `runTests(cases, { filter?, tag?, failFast?, beforeEach?, afterEach? })` runs cases sequentially, prints a summary, and returns `0` or `1`. Filters ignore case; tag matching is exact. Hooks may be asynchronous.
