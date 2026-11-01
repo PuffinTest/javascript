@@ -31,6 +31,13 @@ export function expectTrue(actual, message = 'Expected a truthy value') {
   }
 }
 
+/** Fail unless actual is falsey. */
+export function expectFalse(actual, message = 'Expected a falsey value') {
+  if (actual) {
+    throw new ExpectationFailure(message, { actual, expected: false });
+  }
+}
+
 /** Fail unless actual and unexpected differ. */
 export function expectNotEqual(actual, unexpected, message = 'Values are unexpectedly equal') {
   if (isDeepStrictEqual(actual, unexpected)) {
