@@ -141,6 +141,18 @@ export function expectEndsWith(actual, suffix, message = 'Text does not end with
   }
 }
 
+/** Fail if actual starts with prefix. */
+export function expectNotStartsWith(actual, prefix, message = 'Text unexpectedly starts with the prefix') {
+  if (typeof actual !== 'string' || typeof prefix !== 'string') throw new TypeError('actual and prefix must be strings');
+  if (actual.startsWith(prefix)) throw new ExpectationFailure(message, { actual, expected: `text not starting with ${JSON.stringify(prefix)}` });
+}
+
+/** Fail if actual ends with suffix. */
+export function expectNotEndsWith(actual, suffix, message = 'Text unexpectedly ends with the suffix') {
+  if (typeof actual !== 'string' || typeof suffix !== 'string') throw new TypeError('actual and suffix must be strings');
+  if (actual.endsWith(suffix)) throw new ExpectationFailure(message, { actual, expected: `text not ending with ${JSON.stringify(suffix)}` });
+}
+
 /** Fail unless callback throws an error matching expected (an Error class or predicate). */
 export function expectThrows(callback, expected = Error, message) {
   if (typeof callback !== 'function') throw new TypeError('callback must be a function');
