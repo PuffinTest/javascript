@@ -22,10 +22,13 @@ From this directory, run the included example with `npm run example`. For local 
 
 ## API
 
-- `test(name, callback)` declares a named case. Callbacks may be synchronous or asynchronous.
+- `test(name, callback, { tags?, skipReason? })` declares a named case. Callbacks may be synchronous or asynchronous.
 - `expectEqual(actual, expected, message?)` compares values using Node's deep strict equality.
+- `expectNotEqual(actual, unexpected, message?)` checks that values differ.
 - `expectTrue(actual, message?)` checks truthiness.
+- `expectContains(container, item, message?)` checks the container's native `includes` method.
+- `expectThrows(callback, ErrorClassOrPredicate?, message?)` checks a synchronous callback for an exception.
 - `fail(message?)` explicitly fails the current case.
-- `runTests(cases, { filter? })` runs cases sequentially, prints a summary, and returns `0` or `1`. `filter` matches part of a case name, ignoring case.
+- `runTests(cases, { filter?, tag?, failFast?, beforeEach?, afterEach? })` runs cases sequentially, prints a summary, and returns `0` or `1`. Filters ignore case; tag matching is exact. Hooks may be asynchronous.
 
-This first slice is Node.js-specific because it uses Node's value inspection and deep equality utilities. Discovery, tags, skips, fixtures, and browser support are not implemented yet.
+This implementation is Node.js-specific because it uses Node's value inspection and deep equality utilities. Discovery and browser support are not implemented yet.
