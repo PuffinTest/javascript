@@ -108,6 +108,18 @@ export function expectLength(actual, expected, message = 'Value has an unexpecte
   }
 }
 
+/** Fail unless actual has a length in the inclusive range. */
+export function expectLengthBetween(actual, minimum, maximum, message = 'Value length is outside the expected range') {
+  if (!Number.isInteger(minimum) || !Number.isInteger(maximum) || minimum < 0 || maximum < 0) {
+    throw new RangeError('length bounds must be nonnegative integers');
+  }
+  if (minimum > maximum) throw new RangeError('minimum must be less than or equal to maximum');
+  const actualLength = getLength(actual);
+  if (actualLength < minimum || actualLength > maximum) {
+    throw new ExpectationFailure(message, { actual: actualLength, expected: `length between ${minimum} and ${maximum}, inclusive` });
+  }
+}
+
 /** Fail unless actual has no items or characters. */
 export function expectEmpty(actual, message = 'Expected an empty value') {
   expectLength(actual, 0, message);

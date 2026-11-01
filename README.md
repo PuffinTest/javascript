@@ -34,7 +34,7 @@ From this directory, run the included example with `npm run example`. For local 
 - `expectFalse(actual, message?)` checks falsehood.
 - `expectContains(container, item, message?)` checks the container's native `includes` method.
 - `expectNotContains(container, item, message?)` fails if the item is present.
-- `expectLength(actual, expected, message?)`, `expectEmpty(actual, message?)`, and `expectNotEmpty(actual, message?)` check array, string, map, set, and typed-array sizes.
+- `expectLength(actual, expected, message?)`, `expectLengthBetween(actual, minimum, maximum, message?)`, `expectEmpty(actual, message?)`, and `expectNotEmpty(actual, message?)` check array, string, map, set, and typed-array sizes. Length bounds are inclusive.
 - `expectStartsWith(actual, prefix, message?)` and `expectEndsWith(actual, suffix, message?)` check string prefixes and suffixes; `expectNotStartsWith` and `expectNotEndsWith` assert their absence.
 - `expectThrows(callback, ErrorClassOrPredicate?, message?)` checks a synchronous callback for an exception.
 - `fail(message?)` explicitly fails the current case.

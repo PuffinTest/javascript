@@ -1,4 +1,4 @@
-import { expectEqual, expectTrue, runTests, test } from '../src/index.js';
+import { expectEqual, expectLengthBetween, expectTrue, runTests, test } from '../src/index.js';
 
 const cases = [
   test('formats a title', () => {
@@ -6,6 +6,7 @@ const cases = [
   }),
   test('finds the item', () => {
     expectTrue(['puffin', 'tern'].includes('puffin'));
+    expectLengthBetween(['puffin', 'tern'], 1, 3);
   }),
 ];
 
