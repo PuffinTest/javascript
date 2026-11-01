@@ -81,6 +81,35 @@ export function expectNotContains(container, item, message = 'Item is unexpected
   }
 }
 
+function getLength(actual) {
+  if (actual == null) throw new TypeError('value must be an array, string, map, set, or typed array');
+  if (typeof actual.length === 'number' && Number.isInteger(actual.length) && actual.length >= 0) return actual.length;
+  if ((actual instanceof Map || actual instanceof Set) && Number.isInteger(actual.size)) return actual.size;
+  throw new TypeError('value must be an array, string, map, set, or typed array');
+}
+
+/** Fail unless actual has exactly expected items or characters. */
+export function expectLength(actual, expected, message = 'Value has an unexpected length') {
+  if (!Number.isInteger(expected) || expected < 0) throw new RangeError('expected length must be a nonnegative integer');
+  const actualLength = getLength(actual);
+  if (actualLength !== expected) {
+    throw new ExpectationFailure(message, { actual: actualLength, expected });
+  }
+}
+
+/** Fail unless actual has no items or characters. */
+export function expectEmpty(actual, message = 'Expected an empty value') {
+  expectLength(actual, 0, message);
+}
+
+/** Fail unless actual has at least one item or character. */
+export function expectNotEmpty(actual, message = 'Expected a non-empty value') {
+  const actualLength = getLength(actual);
+  if (actualLength === 0) {
+    throw new ExpectationFailure(message, { actual: actualLength, expected: 'at least 1 item' });
+  }
+}
+
 /** Fail unless callback throws an error matching expected (an Error class or predicate). */
 export function expectThrows(callback, expected = Error, message) {
   if (typeof callback !== 'function') throw new TypeError('callback must be a function');
