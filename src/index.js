@@ -38,6 +38,16 @@ export function expectFalse(actual, message = 'Expected a falsey value') {
   }
 }
 
+/** Fail unless actual is exactly null. */
+export function expectNull(actual, message = 'Expected null') {
+  if (actual !== null) throw new ExpectationFailure(message, { actual, expected: null });
+}
+
+/** Fail if actual is exactly null. */
+export function expectNotNull(actual, message = 'Expected a non-null value') {
+  if (actual === null) throw new ExpectationFailure(message, { actual, expected: 'a non-null value' });
+}
+
 /** Fail unless actual and unexpected differ. */
 export function expectNotEqual(actual, unexpected, message = 'Values are unexpectedly equal') {
   if (isDeepStrictEqual(actual, unexpected)) {

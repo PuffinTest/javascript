@@ -32,6 +32,7 @@ From this directory, run the included example with `npm run example`. For local 
 - `expectBetween(actual, minimum, maximum, message?)` checks an inclusive numeric range and requires numeric values with ordered bounds.
 - `expectTrue(actual, message?)` checks truthiness.
 - `expectFalse(actual, message?)` checks falsehood.
+- `expectNull(actual, message?)` and `expectNotNull(actual, message?)` check for exactly `null`. `undefined` is distinct and passes `expectNotNull`.
 - `expectContains(container, item, message?)` checks the container's native `includes` method.
 - `expectNotContains(container, item, message?)` fails if the item is present.
 - `expectLength(actual, expected, message?)`, `expectLengthBetween(actual, minimum, maximum, message?)`, `expectEmpty(actual, message?)`, and `expectNotEmpty(actual, message?)` check array, string, map, set, and typed-array sizes. Length bounds are inclusive.
