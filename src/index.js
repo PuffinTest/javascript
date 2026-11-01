@@ -84,22 +84,22 @@ export function expectBetween(actual, minimum, maximum, message = 'Value is outs
 
 /** Fail unless container includes item (using its native includes method). */
 export function expectContains(container, item, message = 'Item is not present in the container') {
-  if (container == null || typeof container.includes !== 'function') {
-    throw new TypeError('container must provide an includes(value) method');
-  }
-  if (!container.includes(item)) {
+  if (!containsValue(container, item)) {
     throw new ExpectationFailure(message, { actual: container, expected: `a container containing ${inspect(item)}` });
   }
 }
 
 /** Fail if container includes item, using its native includes method. */
 export function expectNotContains(container, item, message = 'Item is unexpectedly present in the container') {
-  if (container == null || typeof container.includes !== 'function') {
-    throw new TypeError('container must provide an includes(value) method');
-  }
-  if (container.includes(item)) {
+  if (containsValue(container, item)) {
     throw new ExpectationFailure(message, { actual: container, expected: `a container not containing ${inspect(item)}` });
   }
+}
+
+function containsValue(container, item) {
+  if (container instanceof Map || container instanceof Set) return container.has(item);
+  if (container != null && typeof container.includes === 'function') return container.includes(item);
+  throw new TypeError('container must provide includes(value) or be a Map or Set');
 }
 
 function getLength(actual) {
