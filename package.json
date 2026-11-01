@@ -1,0 +1,14 @@
+{
+  "name": "puffintest",
+  "version": "0.1.0",
+  "description": "Small, readable test cases and failure reports for JavaScript",
+  "type": "module",
+  "exports": "./src/index.js",
+  "scripts": {
+    "example": "node examples/basic.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
