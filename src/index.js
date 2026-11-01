@@ -55,7 +55,8 @@ export function expectClose(actual, expected, { relTol = 1e-9, absTol = 0, messa
   }
   const close = actual === expected || (
     Number.isFinite(actual) && Number.isFinite(expected) &&
-    Math.abs(actual - expected) <= Math.max(relTol * Math.max(Math.abs(actual), Math.abs(expected)), absTol)
+    (Math.abs(actual - expected) <= absTol ||
+      Math.abs(actual - expected) / Math.max(Math.abs(actual), Math.abs(expected)) <= relTol)
   );
   if (!close) throw new ExpectationFailure(message ?? `Values are not close (relTol=${relTol}, absTol=${absTol})`, { actual, expected });
 }

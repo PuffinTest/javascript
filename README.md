@@ -25,6 +25,7 @@ From this directory, run the included example with `npm run example`. For local 
 - `test(name, callback, { tags?, skipReason? })` declares a named case. Callbacks may be synchronous or asynchronous.
 - `expectEqual(actual, expected, message?)` compares values using Node's deep strict equality.
 - `expectNotEqual(actual, unexpected, message?)` checks that values differ.
+- `expectClose(actual, expected, { relTol?, absTol?, message? })` checks approximate numeric equality.
 - `expectTrue(actual, message?)` checks truthiness.
 - `expectFalse(actual, message?)` checks falsehood.
 - `expectContains(container, item, message?)` checks the container's native `includes` method.
