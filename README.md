@@ -26,6 +26,7 @@ From this directory, run the included example with `npm run example`. For local 
 - `expectEqual(actual, expected, message?)` compares values using Node's deep strict equality.
 - `expectNotEqual(actual, unexpected, message?)` checks that values differ.
 - `expectTrue(actual, message?)` checks truthiness.
+- `expectFalse(actual, message?)` checks falsehood.
 - `expectContains(container, item, message?)` checks the container's native `includes` method.
 - `expectThrows(callback, ErrorClassOrPredicate?, message?)` checks a synchronous callback for an exception.
 - `fail(message?)` explicitly fails the current case.
