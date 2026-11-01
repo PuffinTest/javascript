@@ -29,6 +29,7 @@ From this directory, run the included example with `npm run example`. For local 
 - `expectTrue(actual, message?)` checks truthiness.
 - `expectFalse(actual, message?)` checks falsehood.
 - `expectContains(container, item, message?)` checks the container's native `includes` method.
+- `expectNotContains(container, item, message?)` fails if the item is present.
 - `expectThrows(callback, ErrorClassOrPredicate?, message?)` checks a synchronous callback for an exception.
 - `fail(message?)` explicitly fails the current case.
 - `runTests(cases, { filter?, tag?, failFast?, beforeEach?, afterEach? })` runs cases sequentially, prints a summary, and returns `0` or `1`. Filters ignore case; tag matching is exact. Hooks may be asynchronous.

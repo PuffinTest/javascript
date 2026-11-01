@@ -71,6 +71,16 @@ export function expectContains(container, item, message = 'Item is not present i
   }
 }
 
+/** Fail if container includes item, using its native includes method. */
+export function expectNotContains(container, item, message = 'Item is unexpectedly present in the container') {
+  if (container == null || typeof container.includes !== 'function') {
+    throw new TypeError('container must provide an includes(value) method');
+  }
+  if (container.includes(item)) {
+    throw new ExpectationFailure(message, { actual: container, expected: `a container not containing ${inspect(item)}` });
+  }
+}
+
 /** Fail unless callback throws an error matching expected (an Error class or predicate). */
 export function expectThrows(callback, expected = Error, message) {
   if (typeof callback !== 'function') throw new TypeError('callback must be a function');
