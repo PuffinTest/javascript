@@ -1,19 +1,20 @@
 # PuffinTest for JavaScript
 
-PuffinTest is an early Node.js test-case library with named cases, deep equality and truth checks, explicit failure, sequential execution, and readable failure reports. The runner supports synchronous and asynchronous callbacks and returns a process status code.
+PuffinTest is an early Node.js test-case library with named cases, deep equality, inclusive numeric range and truth checks, explicit failure, sequential execution, and readable failure reports. The runner supports synchronous and asynchronous callbacks and returns a process status code.
 
 This package is under development and has not been published to npm. Its API and setup instructions may change. The initial implementation targets Node.js 20 or newer.
 
 ## Example
 
 ```js
-import { expectEqual, expectLength, expectStartsWith, runTests, test } from 'puffintest';
+import { expectBetween, expectEqual, expectLength, expectStartsWith, runTests, test } from 'puffintest';
 
 const cases = [
   test('greets the user', () => {
     expectEqual('hello'.toUpperCase(), 'HELLO');
     expectLength(['north', 'south'], 2);
     expectStartsWith('puffin test', 'puffin');
+    expectBetween(18, 13, 19);
   }),
 ];
 
@@ -28,6 +29,7 @@ From this directory, run the included example with `npm run example`. For local 
 - `expectEqual(actual, expected, message?)` compares values using Node's deep strict equality.
 - `expectNotEqual(actual, unexpected, message?)` checks that values differ.
 - `expectClose(actual, expected, { relTol?, absTol?, message? })` checks approximate numeric equality.
+- `expectBetween(actual, minimum, maximum, message?)` checks an inclusive numeric range and requires numeric values with ordered bounds.
 - `expectTrue(actual, message?)` checks truthiness.
 - `expectFalse(actual, message?)` checks falsehood.
 - `expectContains(container, item, message?)` checks the container's native `includes` method.

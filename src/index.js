@@ -61,6 +61,17 @@ export function expectClose(actual, expected, { relTol = 1e-9, absTol = 0, messa
   if (!close) throw new ExpectationFailure(message ?? `Values are not close (relTol=${relTol}, absTol=${absTol})`, { actual, expected });
 }
 
+/** Fail unless actual is between minimum and maximum, inclusive. */
+export function expectBetween(actual, minimum, maximum, message = 'Value is outside the expected range') {
+  if (![actual, minimum, maximum].every((value) => typeof value === 'number')) {
+    throw new TypeError('actual and range bounds must be numbers');
+  }
+  if (minimum > maximum) throw new RangeError('minimum must be less than or equal to maximum');
+  if (!(actual >= minimum && actual <= maximum)) {
+    throw new ExpectationFailure(message, { actual, expected: `between ${minimum} and ${maximum}, inclusive` });
+  }
+}
+
 /** Fail unless container includes item (using its native includes method). */
 export function expectContains(container, item, message = 'Item is not present in the container') {
   if (container == null || typeof container.includes !== 'function') {
