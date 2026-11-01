@@ -9,6 +9,7 @@ const cases = [
     expectNotEmpty(['puffin']);
     expectContains(new Map([['puffin', 1]]), 'puffin');
     expectNotContains(new Map([['puffin', 1]]), 'tern');
+    expectContains('puffin test', 'test');
   }),
   test('finds the item', () => {
     expectTrue(['puffin', 'tern'].includes('puffin'));
