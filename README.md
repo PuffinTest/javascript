@@ -30,7 +30,8 @@ From this directory, run the included example with `npm run example`. For local 
 - `expectNotEqual(actual, unexpected, message?)` checks that values differ.
 - `expectClose(actual, expected, { relTol?, absTol?, message? })` checks approximate numeric equality.
 - `expectGreaterThan` and `expectLessThan` check strict thresholds; `expectAtLeast` and `expectAtMost` accept equality at the threshold.
-- `expectBetween(actual, minimum, maximum, message?) checks an inclusive numeric range and requires numeric values with ordered bounds.
+- `expectBetween(actual, minimum, maximum, message?)` checks an inclusive numeric range and requires numeric values with ordered bounds.
+- `expectNotBetween(actual, minimum, maximum, message?)` fails for values inside that inclusive range.
 - `expectTrue(actual, message?)` checks truthiness.
 - `expectFalse(actual, message?)` checks falsehood.
 - `expectNull(actual, message?)` and `expectNotNull(actual, message?)` check for exactly `null`. `undefined` is distinct and passes `expectNotNull`.

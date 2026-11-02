@@ -76,9 +76,24 @@ export function expectBetween(actual, minimum, maximum, message = 'Value is outs
   if (![actual, minimum, maximum].every((value) => typeof value === 'number')) {
     throw new TypeError('actual and range bounds must be numbers');
   }
-  if (minimum > maximum) throw new RangeError('minimum must be less than or equal to maximum');
+  if (Number.isNaN(minimum) || Number.isNaN(maximum) || minimum > maximum) {
+    throw new RangeError('minimum must be less than or equal to maximum');
+  }
   if (!(actual >= minimum && actual <= maximum)) {
     throw new ExpectationFailure(message, { actual, expected: `between ${minimum} and ${maximum}, inclusive` });
+  }
+}
+
+/** Fail if actual is within the inclusive range. */
+export function expectNotBetween(actual, minimum, maximum, message = 'Value is inside the unexpected range') {
+  if (![actual, minimum, maximum].every((value) => typeof value === 'number')) {
+    throw new TypeError('actual and range bounds must be numbers');
+  }
+  if (Number.isNaN(minimum) || Number.isNaN(maximum) || minimum > maximum) {
+    throw new RangeError('minimum must be less than or equal to maximum');
+  }
+  if (!(actual < minimum || actual > maximum)) {
+    throw new ExpectationFailure(message, { actual, expected: `outside [${minimum}, ${maximum}]` });
   }
 }
 
