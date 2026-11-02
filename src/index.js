@@ -85,6 +85,18 @@ export function expectNotClose(actual, expected, { relTol = 1e-9, absTol = 0, me
   if (close) throw new ExpectationFailure(message ?? `Values are unexpectedly close (relTol=${relTol}, absTol=${absTol})`, { actual, expected: `not close to ${expected}` });
 }
 
+/** Fail unless actual is a finite number (not NaN or either infinity). */
+export function expectFinite(actual, message = 'Value is not finite') {
+  if (typeof actual !== 'number') throw new TypeError('actual must be a number');
+  if (!Number.isFinite(actual)) throw new ExpectationFailure(message, { actual, expected: 'a finite number' });
+}
+
+/** Fail unless actual is NaN or either infinity. */
+export function expectNotFinite(actual, message = 'Value is unexpectedly finite') {
+  if (typeof actual !== 'number') throw new TypeError('actual must be a number');
+  if (Number.isFinite(actual)) throw new ExpectationFailure(message, { actual, expected: 'NaN or infinity' });
+}
+
 /** Fail unless actual is between minimum and maximum, inclusive. */
 export function expectBetween(actual, minimum, maximum, message = 'Value is outside the expected range') {
   if (![actual, minimum, maximum].every((value) => typeof value === 'number')) {
