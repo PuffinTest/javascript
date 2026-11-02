@@ -29,7 +29,8 @@ From this directory, run the included example with `npm run example`. For local 
 - `expectEqual(actual, expected, message?)` compares values using Node's deep strict equality.
 - `expectNotEqual(actual, unexpected, message?)` checks that values differ.
 - `expectClose(actual, expected, { relTol?, absTol?, message? })` checks approximate numeric equality.
-- `expectBetween(actual, minimum, maximum, message?)` checks an inclusive numeric range and requires numeric values with ordered bounds.
+- `expectGreaterThan(actual, threshold, message?)` and `expectLessThan(actual, threshold, message?)` check strict numeric thresholds.
+- `expectBetween(actual, minimum, maximum, message?) checks an inclusive numeric range and requires numeric values with ordered bounds.
 - `expectTrue(actual, message?)` checks truthiness.
 - `expectFalse(actual, message?)` checks falsehood.
 - `expectNull(actual, message?)` and `expectNotNull(actual, message?)` check for exactly `null`. `undefined` is distinct and passes `expectNotNull`.
