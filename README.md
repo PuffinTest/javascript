@@ -28,7 +28,7 @@ From this directory, run the included example with `npm run example`. For local 
 - `test(name, callback, { tags?, skipReason? })` declares a named case. Callbacks may be synchronous or asynchronous.
 - `expectEqual(actual, expected, message?)` compares values using Node's deep strict equality.
 - `expectNotEqual(actual, unexpected, message?)` checks that values differ.
-- `expectClose(actual, expected, { relTol?, absTol?, message? })` checks approximate numeric equality.
+- `expectClose` and `expectNotClose` use the same relative and absolute tolerances for approximate numeric comparisons.
 - `expectGreaterThan` and `expectLessThan` check strict thresholds; `expectAtLeast` and `expectAtMost` accept equality at the threshold.
 - `expectBetween(actual, minimum, maximum, message?)` checks an inclusive numeric range and requires numeric values with ordered bounds.
 - `expectNotBetween(actual, minimum, maximum, message?)` fails for values inside that inclusive range.

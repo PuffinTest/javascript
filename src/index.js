@@ -71,6 +71,20 @@ export function expectClose(actual, expected, { relTol = 1e-9, absTol = 0, messa
   if (!close) throw new ExpectationFailure(message ?? `Values are not close (relTol=${relTol}, absTol=${absTol})`, { actual, expected });
 }
 
+/** Fail if two numbers are close under relative and absolute tolerances. */
+export function expectNotClose(actual, expected, { relTol = 1e-9, absTol = 0, message } = {}) {
+  if (typeof actual !== 'number' || typeof expected !== 'number') throw new TypeError('actual and expected must be numbers');
+  if (!Number.isFinite(relTol) || !Number.isFinite(absTol) || relTol < 0 || absTol < 0) {
+    throw new RangeError('tolerances must be finite and nonnegative');
+  }
+  const close = actual === expected || (
+    Number.isFinite(actual) && Number.isFinite(expected) &&
+    (Math.abs(actual - expected) <= absTol ||
+      Math.abs(actual - expected) / Math.max(Math.abs(actual), Math.abs(expected)) <= relTol)
+  );
+  if (close) throw new ExpectationFailure(message ?? `Values are unexpectedly close (relTol=${relTol}, absTol=${absTol})`, { actual, expected: `not close to ${expected}` });
+}
+
 /** Fail unless actual is between minimum and maximum, inclusive. */
 export function expectBetween(actual, minimum, maximum, message = 'Value is outside the expected range') {
   if (![actual, minimum, maximum].every((value) => typeof value === 'number')) {
