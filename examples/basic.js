@@ -1,4 +1,4 @@
-import { expectContains, expectEmpty, expectEqual, expectLengthBetween, expectNotContains, expectNotEmpty, expectNull, expectNotNull, expectTrue, runTests, test } from '../src/index.js';
+import { expectContains, expectEmpty, expectEqual, expectErrorMessage, expectLengthBetween, expectNotContains, expectNotEmpty, expectNull, expectNotNull, expectThrows, expectTrue, runTests, test } from '../src/index.js';
 
 const cases = [
   test('formats a title', () => {
@@ -10,6 +10,8 @@ const cases = [
     expectContains(new Map([['puffin', 1]]), 'puffin');
     expectNotContains(new Map([['puffin', 1]]), 'tern');
     expectContains('puffin test', 'test');
+    const error = expectThrows(() => { throw new Error('missing puffin'); });
+    expectErrorMessage(error, 'puffin');
   }),
   test('finds the item', () => {
     expectTrue(['puffin', 'tern'].includes('puffin'));

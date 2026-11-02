@@ -200,6 +200,15 @@ export function expectThrows(callback, expected = Error, message) {
   return thrown;
 }
 
+/** Fail unless substring occurs in an error's message or string representation. */
+export function expectErrorMessage(error, substring, message = 'Error message does not contain the expected text') {
+  if (typeof substring !== 'string') throw new TypeError('substring must be a string');
+  const actual = error instanceof Error ? error.message : String(error);
+  if (!actual.includes(substring)) {
+    throw new ExpectationFailure(message, { actual, expected: `error message containing ${JSON.stringify(substring)}` });
+  }
+}
+
 /** Fail the current case with an explicit message. */
 export function fail(message = 'Explicit failure') {
   throw new ExpectationFailure(message);

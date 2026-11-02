@@ -37,7 +37,8 @@ From this directory, run the included example with `npm run example`. For local 
 - `expectNotContains(container, item, message?)` fails if the item is present in those containers.
 - `expectLength(actual, expected, message?)`, `expectLengthBetween(actual, minimum, maximum, message?)`, `expectEmpty(actual, message?)` and `expectNotEmpty(actual, message?)` check array, string, map, set, and typed-array sizes. Length bounds are inclusive.
 - `expectStartsWith(actual, prefix, message?)` and `expectEndsWith(actual, suffix, message?)` check string prefixes and suffixes; `expectNotStartsWith` and `expectNotEndsWith` assert their absence.
-- `expectThrows(callback, ErrorClassOrPredicate?, message?)` checks a synchronous callback for an exception.
+- `expectErrorMessage(error, substring, message?)` checks the error message (or string representation for non-Error values).
+- `expectThrows(callback, ErrorClassOrPredicate?, message?) checks a synchronous callback for an exception.
 - `fail(message?)` explicitly fails the current case.
 - `runTests(cases, { filter?, tag?, failFast?, beforeEach?, afterEach? })` runs cases sequentially, prints a summary, and returns `0` or `1`. Filters ignore case; tag matching is exact. Hooks may be asynchronous.
 
