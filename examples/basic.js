@@ -1,4 +1,4 @@
-import { expectContains, expectEmpty, expectEqual, expectErrorMessage, expectLengthBetween, expectNotContains, expectNotEmpty, expectNull, expectNotNull, expectThrows, expectTrue, runTests, test } from '../src/index.js';
+import { expectContains, expectEmpty, expectEqual, expectErrorMessage, expectLengthBetween, expectMatches, expectNotContains, expectNotEmpty, expectNotMatches, expectNull, expectNotNull, expectThrows, expectTrue, runTests, test } from '../src/index.js';
 
 const cases = [
   test('formats a title', () => {
@@ -12,6 +12,8 @@ const cases = [
     expectContains('puffin test', 'test');
     const error = expectThrows(() => { throw new Error('missing puffin'); });
     expectErrorMessage(error, 'puffin');
+    expectMatches('order-4821 accepted', /order-\d+ accepted/);
+    expectNotMatches('request failed', /\b2xx\b/);
   }),
   test('finds the item', () => {
     expectTrue(['puffin', 'tern'].includes('puffin'));

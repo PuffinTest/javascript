@@ -102,6 +102,38 @@ function containsValue(container, item) {
   throw new TypeError('container must provide includes(value) or be a Map or Set');
 }
 
+/** Fail unless pattern matches somewhere in actual. Accepts a RegExp or pattern string. */
+export function expectMatches(actual, pattern, message = 'Text does not match the expected pattern') {
+  if (typeof actual !== 'string') throw new TypeError('actual must be a string');
+  const matched = regexTest(actual, pattern);
+  if (!matched) throw new ExpectationFailure(message, { actual, expected: `text matching ${patternText(pattern)}` });
+}
+
+/** Fail if pattern matches anywhere in actual. */
+export function expectNotMatches(actual, pattern, message = 'Text unexpectedly matches the pattern') {
+  if (typeof actual !== 'string') throw new TypeError('actual must be a string');
+  const matched = regexTest(actual, pattern);
+  if (matched) throw new ExpectationFailure(message, { actual, expected: `text not matching ${patternText(pattern)}` });
+}
+
+function regexTest(actual, pattern) {
+  if (!(pattern instanceof RegExp) && typeof pattern !== 'string') {
+    throw new TypeError('pattern must be a RegExp or string');
+  }
+  const expression = pattern instanceof RegExp ? pattern : new RegExp(pattern);
+  const previousIndex = expression.lastIndex;
+  expression.lastIndex = 0;
+  try {
+    return expression.test(actual);
+  } finally {
+    expression.lastIndex = previousIndex;
+  }
+}
+
+function patternText(pattern) {
+  return pattern instanceof RegExp ? pattern.toString() : String(pattern);
+}
+
 function getLength(actual) {
   if (actual == null) throw new TypeError('value must be an array, string, map, set, or typed array');
   if (typeof actual.length === 'number' && Number.isInteger(actual.length) && actual.length >= 0) return actual.length;
