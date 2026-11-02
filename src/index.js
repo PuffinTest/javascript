@@ -97,6 +97,18 @@ export function expectNotFinite(actual, message = 'Value is unexpectedly finite'
   if (Number.isFinite(actual)) throw new ExpectationFailure(message, { actual, expected: 'NaN or infinity' });
 }
 
+/** Fail unless actual is NaN. */
+export function expectNaN(actual, message = 'Value is not NaN') {
+  if (typeof actual !== 'number') throw new TypeError('actual must be a number');
+  if (!Number.isNaN(actual)) throw new ExpectationFailure(message, { actual, expected: 'NaN' });
+}
+
+/** Fail if actual is NaN. */
+export function expectNotNaN(actual, message = 'Value is unexpectedly NaN') {
+  if (typeof actual !== 'number') throw new TypeError('actual must be a number');
+  if (Number.isNaN(actual)) throw new ExpectationFailure(message, { actual, expected: 'not NaN' });
+}
+
 /** Fail unless actual is between minimum and maximum, inclusive. */
 export function expectBetween(actual, minimum, maximum, message = 'Value is outside the expected range') {
   if (![actual, minimum, maximum].every((value) => typeof value === 'number')) {

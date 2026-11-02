@@ -30,6 +30,7 @@ From this directory, run the included example with `npm run example`. For local 
 - `expectNotEqual(actual, unexpected, message?)` checks that values differ.
 - `expectClose` and `expectNotClose` use the same relative and absolute tolerances for approximate numeric comparisons.
 - `expectFinite(actual, message?)` rejects NaN and either infinity; `expectNotFinite` accepts those values and rejects finite numbers. Both require a JavaScript number.
+- `expectNaN(actual, message?)` accepts only NaN; `expectNotNaN` rejects NaN and accepts finite values or infinities. Both require a JavaScript number.
 - `expectGreaterThan` and `expectLessThan` check strict thresholds; `expectAtLeast` and `expectAtMost` accept equality at the threshold.
 - `expectBetween(actual, minimum, maximum, message?)` checks an inclusive numeric range and requires numeric values with ordered bounds.
 - `expectNotBetween(actual, minimum, maximum, message?)` fails for values inside that inclusive range.

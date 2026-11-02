@@ -1,4 +1,4 @@
-import { expectAtLeast, expectAtMost, expectContains, expectEmpty, expectEqual, expectErrorMessage, expectFinite, expectGreaterThan, expectLengthBetween, expectLessThan, expectMatches, expectNotBetween, expectNotClose, expectNotContains, expectNotEmpty, expectNotMatches, expectNull, expectNotNull, expectThrows, expectTrue, runTests, test } from '../src/index.js';
+import { expectAtLeast, expectAtMost, expectContains, expectEmpty, expectEqual, expectErrorMessage, expectFinite, expectNaN, expectNotNaN, expectGreaterThan, expectLengthBetween, expectLessThan, expectMatches, expectNotBetween, expectNotClose, expectNotContains, expectNotEmpty, expectNotMatches, expectNull, expectNotNull, expectThrows, expectTrue, runTests, test } from '../src/index.js';
 
 const cases = [
   test('formats a title', () => {
@@ -21,6 +21,8 @@ const cases = [
     expectNotBetween(4, 1, 3);
     expectNotClose(0.1, 0.9);
     expectFinite(3.14);
+    expectNaN(Number.NaN);
+    expectNotNaN(3.14);
   }),
   test('finds the item', () => {
     expectTrue(['puffin', 'tern'].includes('puffin'));
