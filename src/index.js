@@ -94,6 +94,18 @@ export function expectLessThan(actual, threshold, message = 'Value is not less t
   if (!(actual < threshold)) throw new ExpectationFailure(message, { actual, expected: `less than ${threshold}` });
 }
 
+/** Fail unless actual is greater than or equal to threshold. */
+export function expectAtLeast(actual, threshold, message = 'Value is below the minimum threshold') {
+  if (typeof actual !== 'number' || typeof threshold !== 'number') throw new TypeError('actual and threshold must be numbers');
+  if (!(actual >= threshold)) throw new ExpectationFailure(message, { actual, expected: `at least ${threshold}` });
+}
+
+/** Fail unless actual is less than or equal to threshold. */
+export function expectAtMost(actual, threshold, message = 'Value is above the maximum threshold') {
+  if (typeof actual !== 'number' || typeof threshold !== 'number') throw new TypeError('actual and threshold must be numbers');
+  if (!(actual <= threshold)) throw new ExpectationFailure(message, { actual, expected: `at most ${threshold}` });
+}
+
 /** Fail unless container includes item (using its native includes method). */
 export function expectContains(container, item, message = 'Item is not present in the container') {
   if (!containsValue(container, item)) {
